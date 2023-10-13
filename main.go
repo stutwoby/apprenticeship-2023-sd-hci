@@ -33,7 +33,7 @@ type Order struct {
 
 func main() {
 	fmt.Println("Dear Sir/Madam,")
-	fmt.Println("I hope you are well, please follow the prompts below to place an order :)")
+	fmt.Println("please follow the prompts below to place an order :)")
 
 	order := Order{}
 	reader := bufio.NewReader(os.Stdin)
