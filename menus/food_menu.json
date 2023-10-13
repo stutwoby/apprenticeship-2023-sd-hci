@@ -1,0 +1,21 @@
+{
+    "menu": [
+      {
+        "name": "Kebab",
+        "price": 10
+      },
+      {
+        "name": "Pizza",
+        "price": 12
+      },
+      {
+        "name": "Burger",
+        "price": 8
+      },
+      {
+        "name": "Salad",
+        "price": 6
+      }
+    ]
+  }
+  
