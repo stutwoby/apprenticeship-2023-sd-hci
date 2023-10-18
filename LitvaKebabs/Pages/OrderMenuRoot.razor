@@ -1,9 +1,12 @@
-﻿@page "/ordermenu"
+﻿@using LitvaKebabs.Components;
+@page "/ordermenu"
+
 
 <PageTitle>Order menu</PageTitle>
 
 <h1>Order</h1>
 
-@code {
-
+@for(int i = 0; i>MenuItems().Keys.Count; i++) 
+{ 
+    <OrderButton/>
 }
