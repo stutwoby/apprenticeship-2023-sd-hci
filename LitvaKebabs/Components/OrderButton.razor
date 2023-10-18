@@ -1,3 +1,6 @@
-﻿
+﻿@using LitvaKebabs.Pages
+@inject OrderMenuRoot orderMenuRoot
 
-<button class="order-button"></button>
+<button class="order-button" @onclick="@AddMenuItemToReciept">
+    <span class="menu-item-name">@orderMenuRoot.MenuItems.Keys</span>
+</button>
