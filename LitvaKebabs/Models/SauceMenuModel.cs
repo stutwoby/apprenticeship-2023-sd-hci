@@ -2,7 +2,7 @@
 {
     public class SauceMenuModel
     {
-        public string Item {  get; set; } = string.Empty;
-        public decimal? Price { get; set; }
+        public string Sauce {  get; set; } = string.Empty;
+        public decimal Price { get; set; }
     }
 }
