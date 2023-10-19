@@ -27,7 +27,7 @@ namespace LitvaKebabs.Pages
             {
                 HasHeaderRecord = true,
             };
-            using var reader = new StreamReader(Environment.CurrentDirectory + @"\csv\\KebabMenu.csv");
+            using var reader = new StreamReader("\"C:\\Users\\AidanFell\\apprenticeship-2023-sd-hci\\LitvaKebabs\\KebabMenu.csv\"");
             using var csv = new CsvReader(reader, config);
             var records = csv.GetRecords<KebabMenuModel>().ToList();
             Dictionary<string, decimal> menuItems = records.ToDictionary(keySelector: records => records.Item, elementSelector: records => records.Price);
@@ -39,7 +39,7 @@ namespace LitvaKebabs.Pages
             {
                 HasHeaderRecord = true,
             };
-            using var reader = new StreamReader(Environment.CurrentDirectory + "csv\\SauceMenu.csv");
+            using var reader = new StreamReader(Environment.CurrentDirectory + "\"C:\\Users\\AidanFell\\apprenticeship-2023-sd-hci\\LitvaKebabs\\SauceMenu.csv\"");
             using var csv = new CsvReader(reader, config);
             var records = csv.GetRecords<SauceMenuModel>().ToList();
             Dictionary<string, decimal> sauceItems = records.ToDictionary(keySelector: records => records.Sauce, elementSelector: records => records.Price);
