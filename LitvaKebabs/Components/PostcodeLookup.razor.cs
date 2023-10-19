@@ -4,7 +4,6 @@ using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Web;
-using GeoCoordinatePortable;
 
 namespace LitvaKebabs.Components
 {
@@ -60,7 +59,8 @@ namespace LitvaKebabs.Components
         // Modified to return distance in miles.
         public double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
         {
-
+            longitude = deliveringFromPostcodeLon;
+            latitude = deliveringFromPostcodeLat;
             var d1 = latitude * (Math.PI / 180.0);
             var num1 = longitude * (Math.PI / 180.0);
             var d2 = otherLatitude * (Math.PI / 180.0);
