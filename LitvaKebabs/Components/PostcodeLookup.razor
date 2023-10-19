@@ -1,4 +1,6 @@
-﻿<form method="GET">
+﻿@inject JSRuntime jsRuntime;
+@inject ILogger logger;
+<form method="GET">
     <input type="text" name="q" />
     <button type="submit">Lookup postcode</button>
 </form>
