@@ -29,7 +29,7 @@ namespace LitvaKebabs.Pages
             };
             try
             {
-                FileInfo fi = new FileInfo(@"\KebabMenu.csv");
+                FileInfo fi = new(@"\KebabMenu.csv");
                 using FileStream fs = fi.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
                 using StreamReader reader = new StreamReader(fs);
                 using CsvReader csv = new CsvReader(reader, config);
