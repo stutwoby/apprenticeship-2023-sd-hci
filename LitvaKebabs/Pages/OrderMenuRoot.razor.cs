@@ -23,25 +23,37 @@ namespace LitvaKebabs.Pages
 
         private Dictionary<string, decimal> _menuItems()
         {
-            var config = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
+            CsvConfiguration config = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
             };
-            using var reader = new StreamReader("\"C:\\Users\\AidanFell\\apprenticeship-2023-sd-hci\\LitvaKebabs\\KebabMenu.csv\"");
-            using var csv = new CsvReader(reader, config);
-            var records = csv.GetRecords<KebabMenuModel>().ToList();
-            Dictionary<string, decimal> menuItems = records.ToDictionary(keySelector: records => records.Item, elementSelector: records => records.Price);
-            return menuItems;
+            try
+            {
+                //FileInfo fi = new FileInfo(@"C:\Users\AidanFell\source\repos\test.txt");
+                using FileStream fs = fi.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
+                using StreamReader reader = new StreamReader(fs);
+                using CsvReader csv = new CsvReader(reader, config);
+                List<KebabMenuModel> records = csv.GetRecords<KebabMenuModel>().ToList();
+                Dictionary<string, decimal> menuItems = records.ToDictionary(keySelector: records => records.Item, elementSelector: records => records.Price);
+                return menuItems;
+            }
+            catch (FileNotFoundException f)
+            {
+                throw;
+            }
+
         }
         private Dictionary<string, decimal> _sauceItems()
         {
-            var config = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
+            CsvConfiguration config = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
             };
-            using var reader = new StreamReader(Environment.CurrentDirectory + "\"C:\\Users\\AidanFell\\apprenticeship-2023-sd-hci\\LitvaKebabs\\SauceMenu.csv\"");
-            using var csv = new CsvReader(reader, config);
-            var records = csv.GetRecords<SauceMenuModel>().ToList();
+            string saucePath = "SauceMenu.csv";
+            //var testSaucePath = System.IO.Directory.GetFiles("/");
+            using StreamReader reader = new StreamReader(saucePath);
+            using CsvReader csv = new CsvReader(reader, config);
+            List<SauceMenuModel> records = csv.GetRecords<SauceMenuModel>().ToList();
             Dictionary<string, decimal> sauceItems = records.ToDictionary(keySelector: records => records.Sauce, elementSelector: records => records.Price);
             return sauceItems;
         }
