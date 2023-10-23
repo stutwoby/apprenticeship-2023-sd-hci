@@ -25,9 +25,9 @@ namespace LitvaKebabs.Components
             string deliveringToPostcode = DeliveringToPostcode;
             RestResponse? postcodeInformation = PostcodeAPIRequest($"api.postcodes.io/postcodes/{deliveringToPostcode}").GetAwaiter().GetResult();
             PostcodeModel.Root postcodeModel = JsonConvert.DeserializeObject<PostcodeModel.Root>(postcodeInformation.ToString());
-            if(postcodeModel != null )
+            if (postcodeModel != null)
             {
-                if(postcodeModel.status != 200)
+                if (postcodeModel.status != 200)
                 {
                     string not200Error = $"Error, API returned status of {postcodeModel.status}: " +
                         $"failed to get API contents, wrong postcode potentially entered. " +
@@ -46,7 +46,7 @@ namespace LitvaKebabs.Components
             {
                 throw new Exception("Error: postcodeModel is null.");
             }
-            
+
         }
 
         private async Task<RestResponse?> PostcodeAPIRequest(string apiUri)
@@ -72,6 +72,33 @@ namespace LitvaKebabs.Components
             return res * 0.00062137;
         }
 
+        private decimal CalculateDeliveryPrice()
+        {
+            if(GetDistance() > 5.1)
+            {
+                return 0.1189998819991197253M;
+            }
 
+            else if(GetDistance() < 5.1 & GetDistance() > 4.1)
+            {
+                return 3.50M;
+            }
+
+            else if(GetDistance() < 4.1 & GetDistance() > 3.1)
+            {
+                return 3.00M;
+            }
+
+            else if(GetDistance() < 3.1 & GetDistance() > 2.1)
+            {
+                return 2.50M;
+            }
+
+            else if(GetDistance() < 2.1)
+            {
+                return 2.00M;
+            }
+            return 0M;
+        }
     }
 }
