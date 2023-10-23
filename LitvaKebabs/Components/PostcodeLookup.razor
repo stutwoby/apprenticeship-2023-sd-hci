@@ -2,5 +2,13 @@
 @inject ILogger logger;
 <form method="GET">
     <input type="text" name="q" />
-    <button type="submit">Lookup postcode</button>
+    <button type="submit">Lookup postcode:</button>
 </form>
+
+@if(GetDistance() < 5.1)
+{
+    <span class="postcode-distance-result">@DeliveringToPostcode is @Math.Round(GetDistance(), 1)mi from @deliveringFromPostcode.</span>
+} else
+{
+    <span class="postcode-too-far">@DeliveringToPostcode is too far from @deliveringFromPostcode! @DeliveringToPostcode is @Math.Round(GetDistance(), 1)mi away.</span>
+}
