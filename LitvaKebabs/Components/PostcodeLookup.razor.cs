@@ -16,6 +16,7 @@ namespace LitvaKebabs.Components
         private double? deliveringToPostcodeLat;
         [SupplyParameterFromQuery(Name = "q")]
         public string DeliveringToPostcode { get; set; } = string.Empty;
+        public decimal DeliveryPrice { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -60,7 +61,7 @@ namespace LitvaKebabs.Components
         // From https://stackoverflow.com/a/51839058
         // This function is covered by CC-BY-SA 4.0
         // Modified to return distance in miles, and also parameterless.
-        public double GetDistance()
+        private double GetDistance()
         {
             double d1 = deliveringFromPostcodeLat * (Math.PI / 180.0);
             double num1 = deliveringFromPostcodeLon * (Math.PI / 180.0);
@@ -70,5 +71,7 @@ namespace LitvaKebabs.Components
             double res = 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
             return res * 0.00062137;
         }
+
+
     }
 }
