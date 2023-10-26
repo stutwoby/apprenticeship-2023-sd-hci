@@ -27,8 +27,8 @@
             public int? northings { get; set; }
             public string country { get; set; } = string.Empty;
             public string nhs_ha { get; set; } = string.Empty;
-            public double? longitude { get; set; }
-            public double? latitude { get; set; }
+            public double longitude { get; set; }
+            public double latitude { get; set; }
             public string european_electoral_region { get; set; } = string.Empty;
             public string primary_care_trust { get; set; } = string.Empty;
             public string region { get; set; } = string.Empty;
