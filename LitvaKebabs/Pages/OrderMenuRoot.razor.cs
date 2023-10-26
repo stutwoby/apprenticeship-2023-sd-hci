@@ -1,6 +1,4 @@
-﻿using LitvaKebabs.Models;
-using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace LitvaKebabs.Pages
 {
@@ -8,8 +6,8 @@ namespace LitvaKebabs.Pages
     {
         public OrderMenuRoot()
         {
-            MenuItems = _menuItems();
-            SauceItems = _sauceItems();
+            MenuItems = _menuItems;
+            SauceItems = _sauceItems;
         }
 
         [Parameter]
@@ -17,21 +15,29 @@ namespace LitvaKebabs.Pages
         [Parameter]
         public Dictionary<string, decimal> SauceItems { get; set; }
 
-        private Dictionary<string, decimal> _menuItems()
+        private Dictionary<string, decimal> _menuItems = new Dictionary<string, decimal>()
         {
-            string json = File.ReadAllText(@$"{Environment.CurrentDirectory}\KebabMenu.json");
-            List<KebabMenuModel> data = JsonConvert.DeserializeObject<List<KebabMenuModel>>(json);
+            { "CHICKEN DÖNER WRAP", 10.95M },
+            { "CHICKEN SHISH WRAP", 11.95M },
+            { "LAMB YAPRAK WRAP", 12.95M },
+            { "LAMB DÖNER WRAP", 10.95M },
+            { "LAMB SHISH WRAP",12.95M },
+            { "MIX SHISH WRAP",12.95M },
+            { "LAMB KÖFTE WRAP",11.95M },
+            { "FALAFEL, RED PEPPER, RED ONION & HUMMUS WRAP", 10.95M }
+        };
 
-            Dictionary<string, decimal> menuItems = data.ToDictionary(keySelector: data => data.Item, elementSelector: records => records.Price);
-            return menuItems;
-        }
-
-        private Dictionary<string, decimal> _sauceItems()
+        private Dictionary<string, decimal> _sauceItems = new Dictionary<string, decimal>()
         {
-            string json = File.ReadAllText(@$"{Environment.CurrentDirectory}\SauceMenu.json");
-            List<SauceMenuModel> data = JsonConvert.DeserializeObject<List<SauceMenuModel>>(json);
-            Dictionary<string, decimal> sauceItems = data.ToDictionary(keySelector: records => records.Sauce, elementSelector: records => records.Price);
-            return sauceItems;
-        }
+
+            { "MINT SAUCE", 0.49M },
+            { "MAYO", 0.49M },
+            { "HUMMUS", 0.99M },
+            { "SALAD CREAM", 0.49M },
+            { "TAHINI", 0.99M },
+            { "LEMON AND LIME SAUCE", 0.99M },
+            { "AJVAR", 1.99M },
+            { "KAJMAK", 2.49M }
+        };
     }
 }
