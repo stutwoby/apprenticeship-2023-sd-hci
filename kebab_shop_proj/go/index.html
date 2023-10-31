@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebab Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="font-sans">
+    <h1 class="text-4xl text-center my-8">Welcome to the Kebab Shop!</h1>
+
+    <h2 class="text-2xl my-4">Food Menu</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Food Menu Items -->
+        {{ range .FoodMenu }}
+        <li class="border p-4 rounded-lg flex flex-col items-center justify-center">
+            <span class="text-lg mb-4">{{ .Name }} - ${{ .Price }}</span>
+            <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" class="w-64 h-64 object-cover">
+            <div class="my-4">
+                <input type="number" class="w-16 text-center" value="1" id="food-quantity-{{ .Name }}">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="addToOrder('{{ .Name }}', 'food')">Add to Order</button>
+            </div>
+        </li>
+        {{ end }}
+    </ul>
+
+    <h2 class="text-2xl my-4">Drink Menu</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Drink Menu Items -->
+        {{ range .DrinkMenu }}
+        <li class="border p-4 rounded-lg flex flex-col items-center justify-center">
+            <span class="text-lg mb-4">{{ .Name }} - ${{ .Price }}</span>
+            <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" class="w-64 h-64 object-cover">
+            <div class="my-4">
+                <input type="number" class="w-16 text-center" value="1" id="drink-quantity-{{ .Name }}">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="addToOrder('{{ .Name }}', 'drink')">Add to Order</button>
+            </div>
+        </li>
+        {{ end }}
+    </ul>
+
+    <div class="mt-8">
+        <h2 class="text-2xl">Order Summary</h2>
+        <div id="order-summary"></div>
+        <div id="total-cost"></div>
+    </div>
+
+    <script>
+        let order = { food: {}, drink: {} };
+        
+        // Parse the JSON data from the template
+        let foodMenuData = JSON.parse('{{ .FoodMenuJSON }}');
+        let drinkMenuData = JSON.parse('{{ .DrinkMenuJSON }}');
+    
+        function addToOrder(name, category) {
+            const quantity = parseInt($(`#${category}-quantity-${name}`).val());
+    
+            let price = 0;
+            let menuData = (category === 'food') ? foodMenuData : drinkMenuData;
+    
+            for (const menuItem of menuData) {
+                if (menuItem.name === name) {
+                    price = menuItem.price;
+                    break;
+                }
+            }
+    
+            if (!order[category][name]) {
+                order[category][name] = { quantity: 0, price: 0 };
+            }
+    
+            order[category][name].quantity += quantity;
+            order[category][name].price = price;
+    
+            updateOrderSummary();
+        }
+    
+        function updateOrderSummary() {
+    let summaryHtml = '<h3>Food:</h3>';
+    let foodTotalCost = 0;
+    summaryHtml += '<ul>';
+    for (const name in order.food) {
+        const item = order.food[name];
+        const quantity = item.quantity;
+        const price = item.price;
+        foodTotalCost += price * quantity;
+        summaryHtml += `<li>${name}: ${quantity}</li>`;
+    }
+    summaryHtml += '</ul>';
+
+    summaryHtml += '<h3>Drink:</h3>';
+    let drinkTotalCost = 0;
+    summaryHtml += '<ul>';
+    for (const name in order.drink) {
+        const item = order.drink[name];
+        const quantity = item.quantity;
+        const price = item.price;
+        drinkTotalCost += price * quantity;
+        summaryHtml += `<li>${name}: ${quantity}</li>`;
+    }
+    summaryHtml += '</ul>';
+
+    const totalCost = foodTotalCost + drinkTotalCost;
+    summaryHtml += `<h3>Total Cost: $${totalCost.toFixed(2)}</h3>`;
+    $("#order-summary").html(summaryHtml);
+}
+
+    </script>
+    
+</body>
+</html>
