@@ -47,36 +47,60 @@
     </div>
 
     <script>
-        let order = { food: {}, drink: {} };
-        
-        // Parse the JSON data from the template
-        let foodMenuData = JSON.parse('{{ .FoodMenuJSON }}');
-        let drinkMenuData = JSON.parse('{{ .DrinkMenuJSON }}');
-    
-        function addToOrder(name, category) {
-            const quantity = parseInt($(`#${category}-quantity-${name}`).val());
-    
-            let price = 0;
-            let menuData = (category === 'food') ? foodMenuData : drinkMenuData;
-    
-            for (const menuItem of menuData) {
-                if (menuItem.name === name) {
-                    price = menuItem.price;
-                    break;
-                }
-            }
-    
-            if (!order[category][name]) {
-                order[category][name] = { quantity: 0, price: 0 };
-            }
-    
-            order[category][name].quantity += quantity;
-            order[category][name].price = price;
-    
-            updateOrderSummary();
+   let order = { food: {}, drink: {} };
+
+// Parse the JSON data from the template
+let foodMenuData = JSON.parse('{{ .FoodMenuJSON }}');
+let drinkMenuData = JSON.parse('{{ .DrinkMenuJSON }}');
+
+function addToOrder(name, category) {
+    const quantityInput = $(`#${category}-quantity-${name}`);
+    let quantity = parseInt(quantityInput.val());
+
+    if (quantity <= 0) {
+        quantity = 1; // Ensure quantity is at least 1
+    }
+
+    let price = 0;
+    let menuData = (category === 'food') ? foodMenuData : drinkMenuData;
+
+    for (const menuItem of menuData) {
+        if (menuItem.name === name) {
+            price = menuItem.price;
+            break;
         }
-    
-        function updateOrderSummary() {
+    }
+
+    if (!order[category][name]) {
+        order[category][name] = { quantity: 0, price: 0 };
+    }
+
+    order[category][name].quantity += quantity;
+    order[category][name].price = price;
+
+    updateOrderSummary();
+    quantityInput.val(1); // Reset the input to 1
+}
+
+function removeFromOrder(name, category) {
+    if (order[category] && order[category][name]) {
+        const quantityInput = $(`#${category}-quantity-${name}`);
+        let quantity = parseInt(quantityInput.val());
+
+        if (quantity <= 1) {
+            delete order[category][name];
+        } else {
+            order[category][name].quantity = quantity - 1;
+        }
+
+        updateOrderSummary();
+        quantityInput.val(1); // Reset the input to 1
+    }
+}
+
+
+
+function updateOrderSummary() {
     let summaryHtml = '<h3>Food:</h3>';
     let foodTotalCost = 0;
     summaryHtml += '<ul>';
@@ -84,8 +108,9 @@
         const item = order.food[name];
         const quantity = item.quantity;
         const price = item.price;
-        foodTotalCost += price * quantity;
-        summaryHtml += `<li>${name}: ${quantity}</li>`;
+        const itemCost = price * quantity;
+        foodTotalCost += itemCost;
+        summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'food')">Remove</button></li>`;
     }
     summaryHtml += '</ul>';
 
@@ -96,8 +121,9 @@
         const item = order.drink[name];
         const quantity = item.quantity;
         const price = item.price;
-        drinkTotalCost += price * quantity;
-        summaryHtml += `<li>${name}: ${quantity}</li>`;
+        const itemCost = price * quantity;
+        drinkTotalCost += itemCost;
+        summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'drink')">Remove</button></li>`;
     }
     summaryHtml += '</ul>';
 
@@ -106,7 +132,7 @@
     $("#order-summary").html(summaryHtml);
 }
 
-    </script>
+</script>
     
 </body>
 </html>
