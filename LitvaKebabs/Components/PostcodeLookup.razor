@@ -1,0 +1,13 @@
+﻿@inject IJSRuntime jsRuntime;
+
+<div class="postcode-input">
+<input type="text" @bind="DeliveringToPostcode" />
+<button type="submit" @onclick="OnPostcodeLookupButtonClicked">Lookup postcode</button>
+</div>
+@if(GetDistance() < 5.1)
+{
+    <span class="postcode-distance-result">@DeliveringToPostcode is @Math.Round(GetDistance(), 1)mi from @deliveringFromPostcode.</span>
+} else
+{
+    <span class="postcode-too-far">@DeliveringToPostcode is too far from @deliveringFromPostcode! @DeliveringToPostcode is @Math.Round(GetDistance(), 1)mi away.</span>
+}

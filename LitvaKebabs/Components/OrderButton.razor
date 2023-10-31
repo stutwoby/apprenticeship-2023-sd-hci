@@ -1,0 +1,10 @@
+﻿@foreach (var menuItem in orderMenuRoot.MenuItems)
+{
+    <button class="order-button" @onclick="@AddMenuItemToReciept">
+
+        <span class="order-button-menu">@menuItem.Key</span>
+        <span class="order-button-price">@menuItem.Value</span>
+        
+    
+    </button>
+    }

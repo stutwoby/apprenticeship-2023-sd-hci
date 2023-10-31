@@ -1,0 +1,34 @@
+[
+ {
+   "Sauce": "MINT SAUCE",
+   "Price": 0.5
+ },
+ {
+   "Sauce": "MAYO",
+   "Price": 0.5
+ },
+ {
+   "Sauce": "HUMMUS",
+   "Price": 1
+ },
+ {
+   "Sauce": "SALAD CREAM",
+   "Price": 0.5
+ },
+ {
+   "Sauce": "TAHINI",
+   "Price": 1
+ },
+ {
+   "Sauce": "LEMON AND LIME SAUCE",
+   "Price": 1
+ },
+ {
+   "Sauce": "AJVAR",
+   "Price": 2
+ },
+ {
+   "Sauce": "KAJMAK",
+   "Price": 2.5
+ }
+]

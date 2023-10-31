@@ -1,0 +1,34 @@
+﻿[
+ {
+   "Item": "CHICKEN DÖNER WRAP",
+   "Price": 10.95
+ },
+ {
+   "Item": "CHICKEN SHISH WRAP",
+   "Price": 11.95
+ },
+ {
+   "Item": "LAMB YAPRAK WRAP",
+   "Price": 12.95
+ },
+ {
+   "Item": "LAMB DÖNER WRAP",
+   "Price": 10.95
+ },
+ {
+   "Item": "LAMB SHISH WRAP",
+   "Price": 12.95
+ },
+ {
+   "Item": "MIX SHISH WRAP",
+   "Price": 12.95
+ },
+ {
+   "Item": "LAMB KÖFTE WRAP",
+   "Price": 11.95
+ },
+ {
+   "Item": "FALAFEL RED PEPPER RED ONION & HUMMUS WRAP",
+   "Price": 10.95
+ }
+]
