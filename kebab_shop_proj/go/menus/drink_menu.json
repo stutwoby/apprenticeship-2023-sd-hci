@@ -1,17 +1,28 @@
 {
-    "menu": [
-      {
-        "name": "Coke",
-        "price": 2
-      },
-      {
-        "name": "Pepsi",
-        "price": 2
-      },
-      {
-        "name": "Lemonade",
-        "price": 3
-      }
-    ]
-  }
-  
+  "menu": [
+    {
+      "name": "Coke",
+      "price": 2
+    },
+    {
+      "name": "Pepsi",
+      "price": 2
+    },
+    {
+      "name": "Lemonade",
+      "price": 3
+    },
+    {
+      "name": "Iced Tea",
+      "price": 2
+    },
+    {
+      "name": "Orange Juice",
+      "price": 3
+    },
+    {
+      "name": "Coffee",
+      "price": 2.5
+    }
+  ]
+}
