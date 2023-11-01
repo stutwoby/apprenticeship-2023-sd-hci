@@ -7,49 +7,109 @@
     <link rel="icon" href="pics/favicon.jpg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .menu-item {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .quantity {
+            width: 50px;
+            text-align: center;
+        }
+
+        .order-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .order-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
-<body class="font-sans">
-    <h1 class="text-4xl text-center my-8">Welcome to the Kebab Shop!</h1>
+<body>
+    <div class="container">
+        <h1>Welcome to the Kebab Shop!</h1>
 
-    <h2 class="text-2xl my-4 px-4">Food Menu</h2>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Food Menu Items -->
-        {{ range .FoodMenu }}
-        <li class="border p-4 rounded-lg flex flex-col items-center justify-center">
-            <span class="text-lg mb-4">{{ .Name }} - ${{ .Price }}</span>
-            <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" class="w-64 h-64 object-cover">
-            <div class="my-4">
-                <input type="number" class="w-16 text-center" value="1" id="food-quantity-{{ .Name }}">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="addToOrder('{{ .Name }}', 'food')">Add to Order</button>
+        <h2>Food Menu</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Food Menu Items -->
+            {{ range .FoodMenu }}
+            <div class="menu-item">
+                <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
+                <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}">
+                <div class="my-4">
+                    <input type="number" class="quantity" value="1" id="food-quantity-{{ .Name }}">
+                    <button class="order-button" onclick="addToOrder('{{ .Name }}', 'food')">Add to Order</button>
+                </div>
             </div>
-        </li>
-        {{ end }}
-    </ul>
+            {{ end }}
+        </div>
 
-    <h2 class="text-2xl my-4 px-4">Drink Menu</h2>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Drink Menu Items -->
-        {{ range .DrinkMenu }}
-        <li class="border p-4 rounded-lg flex flex-col items-center justify-center">
-            <span class="text-lg mb-4">{{ .Name }} - ${{ .Price }}</span>
-            <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" class="w-64 h-64 object-cover">
-            <div class="my-4">
-                <input type="number" class="w-16 text-center" value="1" id="drink-quantity-{{ .Name }}">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="addToOrder('{{ .Name }}', 'drink')">Add to Order</button>
+        <h2>Drink Menu</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Drink Menu Items -->
+            {{ range .DrinkMenu }}
+            <div class="menu-item">
+                <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
+                <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}">
+                <div class="my-4">
+                    <input type="number" class="quantity" value="1" id="drink-quantity-{{ .Name }}">
+                    <button class="order-button" onclick="addToOrder('{{ .Name }}', 'drink')">Add to Order</button>
+                </div>
             </div>
-        </li>
-        {{ end }}
-    </ul>
+            {{ end }}
+        </div>
 
-    <div class="mt-8 flex flex-col items-center">
-        <h2 class="text-2xl">Order Summary</h2>
-        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-4">
-            <div id="order-summary"></div>
-            <div id="total-cost" class="mt-4 text-lg font-semibold"></div>
-            <button id="confirm-order-button" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg w-full">Confirm Order</button>
+        <div class="mt-8">
+            <h2>Order Summary</h2>
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <div id="order-summary"></div>
+                <div id="total-cost" class="mt-4 text-xl font-semibold"></div>
+                <button id="confirm-order-button" class="mt-4 order-button w-full">Confirm Order</button>
+            </div>
         </div>
     </div>
-    
+
     <div id="order-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity">
