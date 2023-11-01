@@ -1,430 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Litva Kebabs</title>
-    <link rel="icon" href="pics/favicon.jpg" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="pics/favicon.jpg" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+      }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+      h1 {
+        text-align: center;
+        font-size: 36px;
+        margin: 20px 0;
+      }
 
-        h1 {
-            text-align: center;
-            font-size: 36px;
-            margin: 20px 0;
-        }
+      h2 {
+        font-size: 24px;
+        margin: 20px 0;
+      }
 
-        h2 {
-            font-size: 24px;
-            margin: 20px 0;
-        }
+      .menu-item {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
 
-        .menu-item {
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            background-color: #fff;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-        }
+      .menu-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
 
-        .menu-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+      .quantity {
+        width: 50px;
+        text-align: center;
+      }
 
-        .quantity {
-            width: 50px;
-            text-align: center;
-        }
+      .order-button {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .order-button {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .order-button:hover {
-            background-color: #2980b9;
-        }
+      .order-button:hover {
+        background-color: #2980b9;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Litva Kebabs</h1>
+      <h1>Litva Kebabs</h1>
 
-        <h2>Food Menu</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Food Menu Items -->
-            {{ range .FoodMenu }}
-            <div class="menu-item">
-                <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
-                <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}">
-                <div class="my-4">
-                    <input type="number" class="quantity" value="1" id="food-quantity-{{ .Name }}">
-                    <button class="order-button" onclick="addToOrder('{{ .Name }}', 'food')">Add to Order</button>
-                </div>
-            </div>
-            {{ end }}
+      <h2>Food Menu</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Food Menu Items -->
+        {{ range .FoodMenu }}
+        <div class="menu-item">
+          <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
+          <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" />
+          <div class="my-4">
+            <input
+              type="number"
+              class="quantity"
+              value="1"
+              id="food-quantity-{{ .Name }}"
+            />
+            <button
+              class="order-button"
+              onclick="addToOrder('{{ .Name }}', 'food')"
+            >
+              Add to Order
+            </button>
+          </div>
         </div>
+        {{ end }}
+      </div>
 
-        <h2>Drink Menu</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Drink Menu Items -->
-            {{ range .DrinkMenu }}
-            <div class="menu-item">
-                <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
-                <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}">
-                <div class="my-4">
-                    <input type="number" class="quantity" value="1" id="drink-quantity-{{ .Name }}">
-                    <button class="order-button" onclick="addToOrder('{{ .Name }}', 'drink')">Add to Order</button>
-                </div>
-            </div>
-            {{ end }}
+      <h2>Drink Menu</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Drink Menu Items -->
+        {{ range .DrinkMenu }}
+        <div class="menu-item">
+          <span class="text-xl mb-4">{{ .Name }} - ${{ .Price }}</span>
+          <img src="pics/{{ .Name }}.jpg" alt="{{ .Name }}" />
+          <div class="my-4">
+            <input
+              type="number"
+              class="quantity"
+              value="1"
+              id="drink-quantity-{{ .Name }}"
+            />
+            <button
+              class="order-button"
+              onclick="addToOrder('{{ .Name }}', 'drink')"
+            >
+              Add to Order
+            </button>
+          </div>
         </div>
+        {{ end }}
+      </div>
 
-        <div class="mt-8">
-            <h2>Order Summary</h2>
-            <div class="bg-white rounded-lg shadow-md p-4">
-                <div id="order-summary"></div>
-                <div id="total-cost" class="mt-4 text-xl font-semibold"></div>
-                <button id="confirm-order-button" class="mt-4 order-button w-full">Confirm Order</button>
-            </div>
+      <div class="mt-8">
+        <h2>Order Summary</h2>
+        <div class="bg-white rounded-lg shadow-md p-4">
+          <div id="order-summary"></div>
+          <div id="total-cost" class="mt-4 text-xl font-semibold"></div>
+          <button id="confirm-order-button" class="mt-4 order-button w-full">
+            Confirm Order
+          </button>
         </div>
+      </div>
     </div>
 
     <div id="order-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
-        <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-    
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-    
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg font-medium">Confirm Your Order</h3>
-    
-                 
-                    <div class="mt-4 space-y-4">
-                        <input type="text" placeholder="Name" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                        <input type="email" placeholder="Email" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                        <input type="text" placeholder="Address" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                        <input type="text" placeholder="PostCode (SS13 0PW)" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-    
-                <!-- Order Summary in the modal -->
-                <div class="bg-white px-4 py-4 sm:p-6">
-                    <h2 class="text-lg">Order Summary</h2>
-                    <div id="order-summary-modal" class="mt-4"></div>
-                </div>
-    
-                <!-- Payment Section -->
-                <div class="bg-gray-100 px-4 py-4 sm:p-6">
-                    <h2 class="text-lg">Payment</h2>
-       
-                    <div class="mt-4">
-                        <label for="card-number" class="block text-sm font-medium text-gray-700">Card Number</label>
-                        <input type="text" id="card-number" name="card-number" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="mt-4">
-                        <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry Date</label>
-                        <input type="text" id="expiry" name="expiry" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="mt-4">
-                        <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
-                        <input type="text" id="cvv" name="cvv" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-    
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button id="close-modal-button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover-bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Confirm
-                    </button>
-                    <button id="cancel-modal-button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover-bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm">
-                        Cancel
-                    </button>
-                </div>
-            </div>
+      <div
+        class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
+
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span
+        >&#8203;
+
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <h3 class="text-lg font-medium">Confirm Your Order</h3>
+
+            <div class="mt-4 space-y-4">
+              <input
+                type="text"
+                placeholder="Name"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="text"
+                placeholder="PostCode (SS13 0PW)"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
+
+          <!-- Order Summary in the modal -->
+          <div class="bg-white px-4 py-4 sm:p-6">
+            <h2 class="text-lg">Order Summary</h2>
+            <div id="order-summary-modal" class="mt-4"></div>
+          </div>
+
+          <!-- Payment Section -->
+          <div class="bg-gray-100 px-4 py-4 sm:p-6">
+            <h2 class="text-lg">Payment</h2>
+
+            <div class="mt-4">
+              <label
+                for="card-number"
+                class="block text-sm font-medium text-gray-700"
+                >Card Number</label
+              >
+              <input
+                type="text"
+                id="card-number"
+                name="card-number"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div class="mt-4">
+              <label
+                for="expiry"
+                class="block text-sm font-medium text-gray-700"
+                >Expiry Date</label
+              >
+              <input
+                type="text"
+                id="expiry"
+                name="expiry"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div class="mt-4">
+              <label for="cvv" class="block text-sm font-medium text-gray-700"
+                >CVV</label
+              >
+              <input
+                type="text"
+                id="cvv"
+                name="cvv"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
+
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              id="close-modal-button"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover-bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Confirm
+            </button>
+            <button
+              id="cancel-modal-button"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover-bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    
 
     <!--i cant lie, i have no words for this. what on earch is happening. this modal is not being used at any point. and yet, if i remove it, the entire website will just break-->
-    <div id="order-summary-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
-        <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg font-medium">Order Summary</h3>
-
-                    <div id="order-summary-content" class="mt-4"></div>
-                </div>
-
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button id="close-order-summary-modal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover-bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Close
-                    </button>
-                </div>
-            </div>
+    <div
+      id="order-summary-modal"
+      class="fixed z-10 inset-0 overflow-y-auto hidden"
+    >
+      <div
+        class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
+
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span
+        >&#8203;
+
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <h3 class="text-lg font-medium">Order Summary</h3>
+
+            <div id="order-summary-content" class="mt-4"></div>
+          </div>
+
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              id="close-order-summary-modal"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover-bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <script>
-        let order = { food: {}, drink: {} };
-    
-        let foodMenuData = JSON.parse('{{ .FoodMenuJSON }}');
-        let drinkMenuData = JSON.parse('{{ .DrinkMenuJSON }}');
-    
-        function addToOrder(name, category) {
-            const quantityInput = $(`#${category}-quantity-${name}`);
-            let quantity = parseInt(quantityInput.val());
-    
-            if (quantity <= 0) {
-                quantity = 1;
-            }
-    
-            let price = 0;
-            let menuData = (category === 'food') ? foodMenuData : drinkMenuData;
-    
-            for (const menuItem of menuData) {
-                if (menuItem.name === name) {
-                    price = menuItem.price;
-                    break;
-                }
-            }
-    
-            if (!order[category][name]) {
-                order[category][name] = { quantity: 0, price: 0 };
-            }
-    
-            order[category][name].quantity += quantity;
-            order[category][name].price = price;
-    
-            updateOrderSummary();
-            quantityInput.val(1);
+      let order = { food: {}, drink: {} };
+
+      let foodMenuData = JSON.parse("{{ .FoodMenuJSON }}");
+      let drinkMenuData = JSON.parse("{{ .DrinkMenuJSON }}");
+
+      function addToOrder(name, category) {
+        const quantityInput = $(`#${category}-quantity-${name}`);
+        let quantity = parseInt(quantityInput.val());
+
+        if (quantity <= 0) {
+          quantity = 1;
         }
-    
-        function removeFromOrder(name, category) {
-            if (order[category] && order[category][name]) {
-                const quantityInput = $(`#${category}-quantity-${name}`);
-                let quantity = parseInt(quantityInput.val());
-    
-                if (quantity <= 1) {
-                    delete order[category][name];
-                } else {
-                    order[category][name].quantity = quantity - 1;
-                }
-    
-                updateOrderSummary();
-                quantityInput.val(1); 
-            }
+
+        let price = 0;
+        let menuData = category === "food" ? foodMenuData : drinkMenuData;
+
+        for (const menuItem of menuData) {
+          if (menuItem.name === name) {
+            price = menuItem.price;
+            break;
+          }
         }
-    
-        function updateOrderSummary() {
-            let summaryHtml = '<h3>Food:</h3>';
-            let foodTotalCost = 0;
-            summaryHtml += '<ul>';
-            for (const name in order.food) {
-                const item = order.food[name];
-                const quantity = item.quantity;
-                const price = item.price;
-                const itemCost = price * quantity;
-                foodTotalCost += itemCost;
-                summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'food')">Remove</button></li>`;
-            }
-            summaryHtml += '</ul>';
-    
-            summaryHtml += '<h3>Drink:</h3>';
-            let drinkTotalCost = 0;
-            summaryHtml += '<ul>';
-            for (const name in order.drink) {
-                const item = order.drink[name];
-                const quantity = item.quantity;
-                const price = item.price;
-                const itemCost = price * quantity;
-                drinkTotalCost += itemCost;
-                summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'drink')">Remove</button></li>`;
-            }
-            summaryHtml += '</ul>';
-    
-            const totalCost = foodTotalCost + drinkTotalCost;
-            summaryHtml += `<h3>Total Cost: $${totalCost.toFixed(2)}</h3>`;
-    
-            $("#order-summary").html(summaryHtml);
-            $("#order-summary-modal").html(summaryHtml); 
+
+        if (!order[category][name]) {
+          order[category][name] = { quantity: 0, price: 0 };
         }
-    
-        function updateOrderReceipt() {
-            const name = document.querySelector('#order-modal input[placeholder="Name"]');
-            const email = document.querySelector('#order-modal input[placeholder="Email"]');
-            const address = document.querySelector('#order-modal input[placeholder="Address"]');
-            const paymentOptions = document.querySelector('#order-modal input[placeholder="Payment options"]');
-    
-            if (name && email && address && paymentOptions) {
-                const nameValue = name.value;
-                const emailValue = email.value;
-                const addressValue = address.value;
-                const paymentOptionsValue = paymentOptions.value;
-    
-                const orderReceipt = `
+
+        order[category][name].quantity += quantity;
+        order[category][name].price = price;
+
+        updateOrderSummary();
+        quantityInput.val(1);
+      }
+
+      function removeFromOrder(name, category) {
+        if (order[category] && order[category][name]) {
+          const quantityInput = $(`#${category}-quantity-${name}`);
+          let quantity = parseInt(quantityInput.val());
+
+          if (quantity <= 1) {
+            delete order[category][name];
+          } else {
+            order[category][name].quantity = quantity - 1;
+          }
+
+          updateOrderSummary();
+          quantityInput.val(1);
+        }
+      }
+
+      function updateOrderSummary() {
+        let summaryHtml = "<h3>Food:</h3>";
+        let foodTotalCost = 0;
+        summaryHtml += "<ul>";
+        for (const name in order.food) {
+          const item = order.food[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          foodTotalCost += itemCost;
+          summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'food')">Remove</button></li>`;
+        }
+        summaryHtml += "</ul>";
+
+        summaryHtml += "<h3>Drink:</h3>";
+        let drinkTotalCost = 0;
+        summaryHtml += "<ul>";
+        for (const name in order.drink) {
+          const item = order.drink[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          drinkTotalCost += itemCost;
+          summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'drink')">Remove</button></li>`;
+        }
+        summaryHtml += "</ul>";
+
+        const totalCost = foodTotalCost + drinkTotalCost;
+        summaryHtml += `<h3>Total Cost: $${totalCost.toFixed(2)}</h3>`;
+
+        $("#order-summary").html(summaryHtml);
+        $("#order-summary-modal").html(summaryHtml);
+      }
+
+      function updateOrderReceipt() {
+        const name = document.querySelector(
+          '#order-modal input[placeholder="Name"]'
+        );
+        const email = document.querySelector(
+          '#order-modal input[placeholder="Email"]'
+        );
+        const address = document.querySelector(
+          '#order-modal input[placeholder="Address"]'
+        );
+        const paymentOptions = document.querySelector(
+          '#order-modal input[placeholder="Payment options"]'
+        );
+
+        if (name && email && address && paymentOptions) {
+          const nameValue = name.value;
+          const emailValue = email.value;
+          const addressValue = address.value;
+          const paymentOptionsValue = paymentOptions.value;
+
+          const orderReceipt = `
                     <p><strong>Name:</strong> ${nameValue}</p>
                     <p><strong>Email:</strong> ${emailValue}</p>
                     <p><strong>Address:</strong> ${addressValue}</p>
                     <p><strong>Payment options:</strong> ${paymentOptionsValue}</p>
                 `;
-    
-                const orderReceiptElement = document.getElementById('order-receipt');
-                orderReceiptElement.innerHTML = orderReceipt;
-    
-                // Update the order summary in the modal
-                const orderSummaryModal = document.getElementById('order-summary-modal');
-                orderSummaryModal.innerHTML = generateOrderSummary();
-            }
+
+          const orderReceiptElement = document.getElementById("order-receipt");
+          orderReceiptElement.innerHTML = orderReceipt;
+
+          // Update the order summary in the modal
+          const orderSummaryModal = document.getElementById(
+            "order-summary-modal"
+          );
+          orderSummaryModal.innerHTML = generateOrderSummary();
         }
-    
-        function generateOrderSummary() {
-            let summaryHtml = '<h3>Food:</h3>';
-            let foodTotalCost = 0;
-            summaryHtml += '<ul>';
-            for (const name in order.food) {
-                const item = order.food[name];
-                const quantity = item.quantity;
-                const price = item.price;
-                const itemCost = price * quantity;
-                foodTotalCost += itemCost;
-                summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'food')">Remove</button></li>`;
-            }
-            summaryHtml += '</ul>';
-    
-            summaryHtml += '<h3>Drink:</h3>';
-            let drinkTotalCost = 0;
-            summaryHtml += '<ul>';
-            for (const name in order.drink) {
-                const item = order.drink[name];
-                const quantity = item.quantity;
-                const price = item.price;
-                const itemCost = price * quantity;
-                drinkTotalCost += itemCost;
-                summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'drink')">Remove</button></li>`;
-            }
-            summaryHtml += '</ul>';
-    
-            const totalCost = foodTotalCost + drinkTotalCost;
-            summaryHtml += `<h3>Total Cost: $${totalCost.toFixed(2)}</h3>`;
-    
-            return summaryHtml;
+      }
+
+      function generateOrderSummary() {
+        let summaryHtml = "<h3>Food:</h3>";
+        let foodTotalCost = 0;
+        summaryHtml += "<ul>";
+        for (const name in order.food) {
+          const item = order.food[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          foodTotalCost += itemCost;
+          summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'food')">Remove</button></li>`;
         }
-    
-   
-       document.getElementById('close-modal-button').addEventListener('click', function () {
-        const name = document.querySelector('#order-modal input[placeholder="Name"]').value;
-        const address = document.querySelector('#order-modal input[placeholder="Address"]').value;
-        const totalCost = calculateTotalCost();
-        const deliveryTime = Math.floor(Math.random() * 31) + 30;
+        summaryHtml += "</ul>";
 
-        // Get the user's order details
-        const orderDetails = getOrderDetails();
+        summaryHtml += "<h3>Drink:</h3>";
+        let drinkTotalCost = 0;
+        summaryHtml += "<ul>";
+        for (const name in order.drink) {
+          const item = order.drink[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          drinkTotalCost += itemCost;
+          summaryHtml += `<li>${name}: ${quantity} <button onclick="removeFromOrder('${name}', 'drink')">Remove</button></li>`;
+        }
+        summaryHtml += "</ul>";
 
-        // Create the order confirmation message
-        const orderConfirmation = `Thank you for your order, ${name}! Your order will be delivered to ${address} in approximately ${deliveryTime} minutes.\n\nOrder Details:\n${orderDetails}\nOrder Total: $${totalCost.toFixed(2)}`;
+        const totalCost = foodTotalCost + drinkTotalCost;
+        summaryHtml += `<h3>Total Cost: $${totalCost.toFixed(2)}</h3>`;
 
-        alert(orderConfirmation);
+        return summaryHtml;
+      }
 
-        // Close the order modal
-        const orderModal = document.getElementById('order-modal');
-        orderModal.classList.add('hidden');
-    });
+      document
+        .getElementById("close-modal-button")
+        .addEventListener("click", function () {
+          const name = document.querySelector(
+            '#order-modal input[placeholder="Name"]'
+          ).value;
+          const address = document.querySelector(
+            '#order-modal input[placeholder="Address"]'
+          ).value;
+          const totalCost = calculateTotalCost();
+          const deliveryTime = Math.floor(Math.random() * 31) + 30;
 
-    document.getElementById('close-order-summary-modal').addEventListener('click', function () {
-        const orderSummaryModal = document.getElementById('order-summary-modal');
-        orderSummaryModal.classList.add('hidden');
-    });
+          // Get the user's order details
+          const orderDetails = getOrderDetails();
 
-    // Event listener for opening the order-modal
-    document.getElementById('confirm-order-button').addEventListener('click', function () {
-        const orderModal = document.getElementById('order-modal');
-        orderModal.classList.remove('hidden');
-    });
-    
-    document.getElementById('cancel-modal-button').addEventListener('click', function () {
-        const orderModal = document.getElementById('order-modal');
-        orderModal.classList.add('hidden');
-    });
-l
-    function displayOrderSummaryModal() {
+          // Create the order confirmation message
+          const orderConfirmation = `Thank you for your order, ${name}! Your order will be delivered to ${address} in approximately ${deliveryTime} minutes.\n\nOrder Details:\n${orderDetails}\nOrder Total: $${totalCost.toFixed(
+            2
+          )}`;
+
+          alert(orderConfirmation);
+
+          // Close the order modal
+          const orderModal = document.getElementById("order-modal");
+          orderModal.classList.add("hidden");
+        });
+
+      document
+        .getElementById("close-order-summary-modal")
+        .addEventListener("click", function () {
+          const orderSummaryModal = document.getElementById(
+            "order-summary-modal"
+          );
+          orderSummaryModal.classList.add("hidden");
+        });
+
+      // Event listener for opening the order-modal
+      document
+        .getElementById("confirm-order-button")
+        .addEventListener("click", function () {
+          const orderModal = document.getElementById("order-modal");
+          orderModal.classList.remove("hidden");
+        });
+
+      document
+        .getElementById("cancel-modal-button")
+        .addEventListener("click", function () {
+          const orderModal = document.getElementById("order-modal");
+          orderModal.classList.add("hidden");
+        });
+      
+      function displayOrderSummaryModal() {
         const orderSummary = generateOrderSummary();
-        const modalContent = document.getElementById('order-summary-content');
+        const modalContent = document.getElementById("order-summary-content");
         modalContent.innerHTML = orderSummary;
-    }
+      }
 
-     function calculateTotalCost() {
+      function calculateTotalCost() {
         let foodTotalCost = 0;
         for (const name in order.food) {
-            const item = order.food[name];
-            const quantity = item.quantity;
-            const price = item.price;
-            const itemCost = price * quantity;
-            foodTotalCost += itemCost;
+          const item = order.food[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          foodTotalCost += itemCost;
         }
 
         let drinkTotalCost = 0;
         for (const name in order.drink) {
-            const item = order.drink[name];
-            const quantity = item.quantity;
-            const price = item.price;
-            const itemCost = price * quantity;
-            drinkTotalCost += itemCost;
+          const item = order.drink[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          drinkTotalCost += itemCost;
         }
 
         const totalCost = foodTotalCost + drinkTotalCost;
         return totalCost;
-    }
+      }
 
-    function getOrderDetails() {
-        const foodDetails = getOrderCategoryDetails(order.food, 'Food');
-        const drinkDetails = getOrderCategoryDetails(order.drink, 'Drink');
+      function getOrderDetails() {
+        const foodDetails = getOrderCategoryDetails(order.food, "Food");
+        const drinkDetails = getOrderCategoryDetails(order.drink, "Drink");
         return `${foodDetails}${drinkDetails}`;
-    }
+      }
 
-    function getOrderCategoryDetails(category, categoryName) {
-        let details = '';
+      function getOrderCategoryDetails(category, categoryName) {
+        let details = "";
         for (const name in category) {
-            const item = category[name];
-            const quantity = item.quantity;
-            const price = item.price;
-            const itemCost = price * quantity;
-            details += `${name}: ${quantity} x $${price.toFixed(2)} = $${itemCost.toFixed(2)}\n`;
+          const item = category[name];
+          const quantity = item.quantity;
+          const price = item.price;
+          const itemCost = price * quantity;
+          details += `${name}: ${quantity} x $${price.toFixed(
+            2
+          )} = $${itemCost.toFixed(2)}\n`;
         }
         if (details) {
-            return `${categoryName}:\n${details}\n`;
+          return `${categoryName}:\n${details}\n`;
         }
-        return '';
-    }
-        
-</script> 
-</body>
+        return "";
+      }
+    </script>
+  </body>
 </html>

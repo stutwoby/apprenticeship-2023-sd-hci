@@ -17,16 +17,8 @@
       "price": 6
     },
     {
-      "name": "Chicken Wrap",
-      "price": 9
-    },
-    {
       "name": "Spaghetti",
       "price": 11
-    },
-    {
-      "name": "Fish and Chips",
-      "price": 12
     }
   ]
 }
