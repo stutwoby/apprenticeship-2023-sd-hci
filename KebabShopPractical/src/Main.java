@@ -1,5 +1,7 @@
+import TakeAwayApp.Introduction;
+
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Order newOrder = new Order();
+    public static void main(String[] args){
+        new Introduction();
     }
 }
