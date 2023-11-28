@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3poKSGMgcvOO/WenJN9akLj3fuxIUnt2+9pK26umpXU1tThzVqBq19j0kldIHVX+fDt31C8LURFBVNFaxwF4uA==",
+  "success": true,
+  "projectFilePath": "C:\\Stuart\\Projects\\apprenticeship-2023-sd-hci\\SQLLiteDemo\\DependencyInjectionDemo\\DependencyInjectionDemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\asus\\.nuget\\packages\\litedb\\5.0.17\\litedb.5.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}

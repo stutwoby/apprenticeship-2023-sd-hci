@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    @{
+        foreach(var menuIem in Model.GetAllMenuitems())
+        {
+            <h1>@menuIem.Name</h1>
+            <h1>@menuIem.Price</h1>
+        }
+       }
+        
+</div>
