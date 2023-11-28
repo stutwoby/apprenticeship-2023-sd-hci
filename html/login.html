@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login/Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="pics/favicon.jpg" type="image/x-icon" />
+    <style>
+        @media (min-width: 640px) {
+            .form-container {
+                display: flex;
+                justify-content: center;
+            }
+            .form-box {
+                flex: 1;
+                margin: 0.5rem;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .form-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-box {
+                width: 75%;
+                max-width: 300px; 
+                margin: 0.5rem;
+            }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var error = new URLSearchParams(window.location.search).get("error");
+            if (error === "1") {
+                alert("Username not found. Please sign up if you don't have an account.");
+            }
+        };
+    </script>
+</head>
+<body class="bg-blue-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-screen-md">
+        <div class="form-container">
+            <div class="form-box p-4 bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl text-blue-600 mb-6">Login</h1>
+                <form action="/" method="post">
+                    <div class="mb-4">
+                        <label for="username" class="block text-gray-600 text-sm">Username:</label>
+                        <input type="text" id="username" name="username" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="block text-gray-600 text-sm">Password:</label>
+                        <input type="password" id="password" name="password" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2">Login</button>
+                </form>
+            </div>
+
+            <div class="form-box p-4 bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl text-blue-600 mb-6">Signup</h1>
+                <form action="/signup" method="post">
+                    <div class="mb-4">
+                        <label for="newUsername" class="block text-gray-600 text-sm">New Username:</label>
+                        <input type="text" id="newUsername" name="newUsername" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="newPassword" class="block text-gray-600 text-sm">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-600 text-sm">Email:</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="address" class="block text-gray-600 text-sm">Address:</label>
+                        <input type="text" id="address" name="address" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
