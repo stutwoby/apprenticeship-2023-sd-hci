@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litva Kebabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="pics/favicon.jpg" type="image/x-icon" />
+    <style>
+     
+     html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer {
+            margin-top: auto;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+        }
+
+        .active-link {
+            position: relative;
+            border-radius: 8px; 
+            background-color: #3182ce;
+            padding: 0.5rem 1rem; 
+            color: #fff; 
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hamburger {
+                display: block;
+                position: relative;
+                z-index: 2; 
+            }
+
+            .menu-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #3182ce;
+                padding: 1rem;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1;
+            }
+
+            .menu-links a {
+                padding: 1rem;
+                margin: 0.5rem;
+                border-radius: 4px;
+            }
+
+            .menu-links.active {
+                display: flex;
+            }
+
+            .close-btn {
+                text-align: right;
+                margin-bottom: 1rem;
+                display: block;
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+
+            .close-btn span {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .close-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 p-4 text-white flex items-center justify-between">
+        <div class="flex items-center">
+            <h1 class="text-3xl mr-4 w-48">Litva Kebabs</h1>
+            <div class="hidden md:block border-l border-white h-6 mx-4"></div>
+            <div class="hidden md:flex space-x-4 menu-links">
+                <a href="/signout">Sign Out</a>
+                <a href="/home" class="active-link">Home</a>
+                <a href="/profile">Profile</a>
+                <a href="/order">Order</a>
+                <a href="/restaurant">Restaurant</a>
+                <a href="/reviews">Reviews</a>
+            </div>
+        </div>
+        <div class="md:hidden">
+            <button class="hamburger text-white focus:outline-none">
+                &#9776;
+            </button>
+        </div>
+    </nav>
+    
+
+    <div class="container mx-auto mt-8 px-4">
+        <h2 class="text-4xl font-bold mb-6">Welcome to Litva Kebabs</h2>
+        <p class="text-lg mb-4">Delicious, authentic kebabs made just for you!</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">About us</h3>
+                <p>Explore our beautiful restaurant filled with quality food thats guaranteed to make you never want to turn away</p>
+                <a href="/restaurant" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">View Our Restaurant</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">Order Online</h3>
+                <p>Order your favorite kebabs online and get them delivered to your doorstep.</p>
+                <a href="/order" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Order Now</a>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-3xl font-semibold mb-4">About Us</h2>
+            <p>We pride ourselves on serving the best kebabs in town, using the finest ingredients and traditional recipes.</p>
+        </div>
+    </div>
+
+    <footer class="bg-gray-200 text-center py-4 mt-8 footer">
+        <p>&copy; 2023 Litva Kebabs. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger');
+            const menuLinks = document.querySelector('.menu-links');
+            const closeButton = document.querySelector('.close-btn');
+
+            hamburger.addEventListener('click', () => {
+                menuLinks.classList.toggle('active');
+                closeButton.classList.toggle('hidden');
+            });
+
+            closeButton.addEventListener('click', () => {
+                menuLinks.classList.remove('active');
+                closeButton.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

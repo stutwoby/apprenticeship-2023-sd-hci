@@ -1,0 +1,14 @@
+I used MySQL workbench, but im sure you can use anything. just make the connection, if you want to use my code, you can just put it on 127.0.0.1:3306.
+obviously, youll need to make an account with elevated perms, and then put the details for it on here: db, err = sql.Open("mysql", "devuser:123456@tcp(127.0.0.1:3306)/kebabshop").
+
+should also be noted, the database im using is called kebabshop, so change that if needed. 
+then, im just using the login table, which you can create the same way i have with this query:
+
+CREATE TABLE kebabshop.login (
+    ID INT AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    PRIMARY KEY (ID)
+);

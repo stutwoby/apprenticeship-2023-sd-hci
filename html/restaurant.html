@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="pics/favicon.jpg" type="image/x-icon" />
+    <title>Restaurant</title>
+    <style>
+        .header {
+            min-width: 300px;
+        }
+
+        .footer {
+            margin-top: auto;
+        }
+     
+     html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer {
+            margin-top: auto;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+        }
+        .active-link {
+            position: relative;
+            border-radius: 8px; 
+            background-color: #3182ce;
+            padding: 0.5rem 1rem; 
+            color: #fff; 
+            display: inline-block;
+        }
+
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hamburger {
+                display: block;
+                position: relative;
+                z-index: 2; 
+            }
+
+            .menu-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #3182ce;
+                padding: 1rem;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1;
+            }
+
+            .menu-links a {
+                padding: 1rem;
+                margin: 0.5rem;
+                border-radius: 4px;
+            }
+
+            .menu-links.active {
+                display: flex;
+            }
+
+            .close-btn {
+                text-align: right;
+                margin-bottom: 1rem;
+                display: block;
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+
+            .close-btn span {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .close-btn {
+                display: none;
+            }
+        }
+    </style>
+ 
+</head>
+<body>
+    <nav class="bg-blue-500 p-4 text-white flex items-center justify-between">
+        <div class="flex items-center">
+            <h1 class="text-3xl mr-4 w-48">Litva Kebabs</h1>
+            <div class="hidden md:block border-l border-white h-6 mx-4"></div>
+            <div class="hidden md:flex space-x-4 menu-links">
+                <a href="/signout">Sign Out</a>
+                <a href="/home">Home</a>
+                <a href="/profile">Profile</a>
+                <a href="/order">Order</a>
+                <a href="/restaurant" class="active-link">Restaurant</a>
+                <a href="/reviews">Reviews</a>
+            </div>
+        </div>
+        <div class="md:hidden">
+            <button class="hamburger text-white focus:outline-none">
+                &#9776;
+            </button>
+        </div>
+    </nav>
+
+    <section class="container mx-auto my-8 p-8 bg-white shadow-md rounded-lg">
+        <h2 class="text-3xl font-bold mb-4">About Litva Kebabs</h2>
+        <p class="mb-6">Welcome to Litva Kebabs, your go-to spot for delicious kebabs made with love and the finest ingredients. Established in 2020, our passion for delivering mouthwatering kebabs drives everything we do.</p>
+        <p class="mb-6">At Litva Kebabs, we believe in offering not just a meal, but an experience. Our commitment to quality, taste, and exceptional service makes us the perfect choice for your cravings.</p>
+        <p class="mb-6">Come and visit us today, and indulge in the flavors that will keep you coming back for more!</p>
+
+        <!-- Opening Times -->
+        <div class="border-t pt-4">
+            <h3 class="text-xl font-semibold mb-2">Opening Times</h3>
+            <p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+            <p>Saturday - Sunday: 12:00 PM - 11:00 PM</p>
+        </div>
+    </section>
+
+ 
+    <section class="w-full max-w-screen-lg mx-auto">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.7834784795905!2d0.11716194118653193!3d51.53173898941316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a5b5667f267d%3A0x53608a405945b1da!2sLt%20kebabai%20kimo%20street%20food!5e0!3m2!1sen!2suk!4v1701185819545!5m2!1sen!2suk" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+  
+    <footer class="bg-gray-200 text-center py-4 mt-auto">
+        <p>&copy; 2023 Litva Kebabs. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger');
+            const menuLinks = document.querySelector('.menu-links');
+            const closeButton = document.querySelector('.close-btn');
+
+            hamburger.addEventListener('click', () => {
+                menuLinks.classList.toggle('active');
+                closeButton.classList.toggle('hidden');
+            });
+
+            closeButton.addEventListener('click', () => {
+                menuLinks.classList.remove('active');
+                closeButton.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
