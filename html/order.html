@@ -273,13 +273,12 @@
           </div>
         </div>
 
-        <!-- Order Summary in the modal -->
+       
         <div class="bg-white px-4 py-4 sm:p-6">
           <h2 class="text-lg">Order Summary</h2>
           <div id="order-summary-modal" class="mt-4"></div>
         </div>
 
-        <!-- Payment Section -->
         <div class="bg-gray-100 px-4 py-4 sm:p-6">
           <h2 class="text-lg">Payment</h2>
 
@@ -574,15 +573,14 @@ document.getElementById("close-modal-button").addEventListener("click", function
     const totalCost = calculateTotalCost();
     const deliveryTime = Math.floor(Math.random() * 31) + 30;
 
-    // Get the user's order details
+    
     const orderDetails = getOrderDetails();
 
-    // Create the order confirmation message
+
     const orderConfirmation = `Thank you for your order, ${name}! Your order will be delivered to ${address} in approximately ${deliveryTime} minutes.\n\nOrder Details:\n${orderDetails}\nOrder Total: $${totalCost.toFixed(2)}`;
 
     alert(orderConfirmation);
 
-    // Close the order modal
     const orderModal = document.getElementById("order-modal");
     orderModal.classList.add("hidden");
   } else {
@@ -599,7 +597,6 @@ document.getElementById("close-modal-button").addEventListener("click", function
         orderSummaryModal.classList.add("hidden");
       });
 
-    // Event listener for opening the order-modal
     function isOrderEmpty() {
   return Object.keys(order.food).length === 0 && Object.keys(order.drink).length === 0;
 }
